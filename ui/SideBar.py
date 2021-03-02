@@ -71,7 +71,7 @@ class SideBar(QWidget):
 
     def show_dialog(self, active_name):
         ok, min, step = False, 3, 1
-        if active_name in [PolyLine.name()]:
+        if active_name in [PolyLine.name(), Polygon.name()]:
             num, ok = QInputDialog.getInt(self, 'Количество точек', 'Введите количество точек', min=min, step=step)
         if not ok:
             num = 3

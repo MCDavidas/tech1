@@ -53,13 +53,15 @@ class DrawArea(QWidget):
             self.drawling = True
 
         self.points.append(event.pos())
-        if len(self.points) > 2 and self.parent.active == PolyLine.name():
+        if self.parent.active == Polygon.name():
+            if len(self.points) == self.parent.num:
+                self.figures.append(Polygon(self.points, border_color, bg_color))
+                self.drawling = False
+        elif len(self.points) > 2 and self.parent.active == PolyLine.name():
             if len(self.points) <= self.parent.num:
                 self.figures[-1].add_segment(LineSegment(self.points[-2], self.points[-1], border_color))
             if len(self.points) == self.parent.num:
                 self.drawling = False
-        elif (len(self.points) - 1)*2 == self.parent.num:
-            pass
         elif len(self.points) == 2:
             if self.parent.active == LineSegment.name():
                 self.figures.append(LineSegment(*self.points, border_color))
@@ -71,6 +73,10 @@ class DrawArea(QWidget):
                 self.figures.append(Circle(*self.points, border_color, bg_color))
             elif self.parent.active == PolyLine.name():
                 self.figures.append(PolyLine([LineSegment(*self.points, border_color)]))
+                self.update()
+                return
+            elif self.parent.active == Polygon.name():
+                self.figures.append(Polygon([LineSegment(*self.points, border_color)]))
                 self.update()
                 return
             else:

@@ -7,5 +7,6 @@ from src.Line import Line
 from src.LineSegment import LineSegment
 from src.PolyLine import PolyLine
 from src.Ray import Ray
+from src.Polygon import Polygon
 
-shapes = [LineSegment, Line, Ray, PolyLine, Circle, Ellipse]
+shapes = [LineSegment, Line, Ray, PolyLine, Circle, Ellipse, Polygon]
